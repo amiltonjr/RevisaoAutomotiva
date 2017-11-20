@@ -276,14 +276,14 @@ public class ManutencaoActivity extends AppCompatActivity {
         }
 
         String txtQuilometragem = UtilsGUI.validaCampoTexto(this, editTextQuilometragem, com.utfpr.amiltonjr.revisaoautomotiva.R.string.quilometragem_vazia);
-        if (txtQuilometragem == null){
+        if (txtQuilometragem == null) {
             return;
         }
 
         int quilometragem = Integer.parseInt(txtQuilometragem);
 
         // Valida a quilometragem
-        if (quilometragem <= 0){
+        if (quilometragem <= 0) {
             UtilsGUI.avisoErro(this, com.utfpr.amiltonjr.revisaoautomotiva.R.string.quilometragem_invalida);
             editTextQuilometragem.requestFocus();
             return;

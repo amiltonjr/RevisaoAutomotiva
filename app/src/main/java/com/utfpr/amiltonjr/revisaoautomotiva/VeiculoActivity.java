@@ -19,6 +19,7 @@ import com.utfpr.amiltonjr.revisaoautomotiva.persistencia.ConexaoDatabase;
 import com.utfpr.amiltonjr.revisaoautomotiva.utils.UtilsGUI;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class VeiculoActivity extends AppCompatActivity {
@@ -90,6 +91,12 @@ public class VeiculoActivity extends AppCompatActivity {
                 veiculo =  conexao.getVeiculoDao().queryForId(id);
 
                 editTextPlaca.setText(veiculo.getPlaca());
+                editTextMarca.setText(veiculo.getMarca());
+                editTextModelo.setText(veiculo.getModelo());
+                editTextCor.setText(veiculo.getCor());
+
+                posicao = posicaoCategoria(veiculo.getCategoria());
+                spinnerCategoria.setSelection(posicao);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -218,8 +225,14 @@ public class VeiculoActivity extends AppCompatActivity {
 
     private void salvar() {
 
-        String descricao  = UtilsGUI.validaCampoTexto(this, editTextPlaca, R.string.descricao_vazia);
-        if (descricao == null){
+        String placa  = UtilsGUI.validaCampoTexto(this, editTextPlaca, R.string.placa_vazia);
+        String marca = UtilsGUI.validaCampoTexto(this, editTextMarca, R.string.marca_vazia);
+        String modelo = UtilsGUI.validaCampoTexto(this, editTextModelo, R.string.modelo_vazio);
+        String cor = UtilsGUI.validaCampoTexto(this, editTextCor, R.string.cor_vazia);
+        Spinner s_categoria = (Spinner) findViewById(R.id.spinnerCategoriaVeiculo);
+        String categoria = s_categoria.getSelectedItem().toString();
+
+        if (placa == null) {
             return;
         }
 
@@ -227,14 +240,20 @@ public class VeiculoActivity extends AppCompatActivity {
 
             ConexaoDatabase conexao = ConexaoDatabase.getInstance(this);
 
-            List<Veiculo> lista = conexao.getVeiculoDao().queryBuilder().where().eq("placa", descricao).query();
+            if (modo == NOVO) {
+                List<Veiculo> lista = conexao.getVeiculoDao().queryBuilder().where().eq("placa", placa).query();
 
-            if (lista != null && lista.size() > 0) {
-                UtilsGUI.avisoErro(this, R.string.descricao_usada);
-                return;
+                if (lista != null && lista.size() > 0) {
+                    UtilsGUI.avisoErro(this, R.string.placa_usada);
+                    return;
+                }
             }
 
-            veiculo.setPlaca(descricao);
+            veiculo.setPlaca(placa);
+            veiculo.setMarca(marca);
+            veiculo.setModelo(modelo);
+            veiculo.setCor(cor);
+            veiculo.setCategoria(categoria);
 
             if (modo == NOVO) {
 
@@ -256,6 +275,27 @@ public class VeiculoActivity extends AppCompatActivity {
     private void cancelar() {
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    private int posicaoCategoria(String categoria) {
+
+        List<String> listaCategorias = Arrays.asList(getResources().getStringArray(R.array.veiculo_categoria));
+
+        try {
+            for (int pos = 0; pos < listaCategorias.size(); pos++) {
+
+                String t = listaCategorias.get(pos);
+
+                if (t.equals(categoria))
+                    return pos;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+
+            return -1;
+        }
+
+        return -1;
     }
 
     @Override

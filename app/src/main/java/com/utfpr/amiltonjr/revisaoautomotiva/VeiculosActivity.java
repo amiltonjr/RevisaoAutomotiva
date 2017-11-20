@@ -94,15 +94,17 @@ public class VeiculosActivity extends AppCompatActivity {
         try {
             ConexaoDatabase conexao = ConexaoDatabase.getInstance(this);
 
-            lista = conexao.getVeiculoDao().queryBuilder().orderBy("descricao", true).query();
+            lista = conexao.getVeiculoDao().queryBuilder().orderBy("placa", true).query();
+
+            listaAdapter = new ArrayAdapter<Veiculo>(this, android.R.layout.simple_list_item_1, lista);
+
+            listViewVeiculos.setAdapter(listaAdapter);
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-
-        listaAdapter = new ArrayAdapter<Veiculo>(this, android.R.layout.simple_list_item_1, lista);
-
-        listViewVeiculos.setAdapter(listaAdapter);
     }
 
     private void novoVeiculo() {
@@ -114,7 +116,7 @@ public class VeiculosActivity extends AppCompatActivity {
         try {
 
             ConexaoDatabase conexao = ConexaoDatabase.getInstance(this);
-            List<Manutencao> lista = conexao.getManutencaoDao().queryBuilder().where().eq("veiculo_id", veiculo.getId()).query();
+            List<Manutencao> lista = conexao.getManutencaoDao().queryBuilder().where().eq("id", veiculo.getId()).query();
 
             if (lista != null && lista.size() > 0){
                 UtilsGUI.avisoErro(this, R.string.veiculo_usado);
