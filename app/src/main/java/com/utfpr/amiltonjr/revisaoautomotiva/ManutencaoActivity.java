@@ -25,6 +25,9 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.utfpr.amiltonjr.revisaoautomotiva.R.string.quilometragem;
+import static com.utfpr.amiltonjr.revisaoautomotiva.R.string.valor;
+
 public class ManutencaoActivity extends AppCompatActivity {
 
     public static final String MODO    = "MODO";
@@ -99,8 +102,8 @@ public class ManutencaoActivity extends AppCompatActivity {
                 manutencao = conexao.getManutencaoDao().queryForId(id);
 
                 editTextDescricao.setText(manutencao.getDescricao());
-                editTextQuilometragem.setText(String.valueOf(manutencao.getQuilometragem()));
-                editTextValor.setText(String.valueOf(manutencao.getValor()));
+                editTextQuilometragem.setText(manutencao.getQuilometragem());
+                editTextValor.setText(formatDecimal(manutencao.getValor()));
 
                 posicao2 = posicaoTipo(manutencao.getTipo());
                 spinnerTipo.setSelection(posicao2);
@@ -322,11 +325,25 @@ public class ManutencaoActivity extends AppCompatActivity {
     private void salvar() {
 
         String descricao  = UtilsGUI.validaCampoTexto(this, editTextDescricao, R.string.descricao_vazia);
-        String txtQuilometragem = UtilsGUI.validaCampoTexto(this, editTextQuilometragem, R.string.quilometragem_vazia);
-        int quilometragem = Integer.parseInt(txtQuilometragem);
-        double valor = Double.parseDouble(UtilsGUI.validaCampoTexto(this, editTextValor, R.string.valor_vazio));
 
-        if (descricao == null || txtQuilometragem == null) {
+        if (descricao == null)
+            return;
+
+        String txtQuilometragem = UtilsGUI.validaCampoTexto(this, editTextQuilometragem, R.string.quilometragem_vazia);
+
+        if (txtQuilometragem == null)
+            return;
+
+        String txtValor = UtilsGUI.validaCampoTexto(this, editTextValor, R.string.valor_vazio);
+
+        if (txtValor == null)
+            return;
+
+        try {
+            int quilometragem = Integer.parseInt(txtQuilometragem);
+            double valor = Double.parseDouble(txtValor);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
             return;
         }
 
@@ -346,8 +363,8 @@ public class ManutencaoActivity extends AppCompatActivity {
 
         manutencao.setDescricao(descricao);
         manutencao.setTipo(spinnerTipo.getSelectedItem().toString());
-        manutencao.setQuilometragem(quilometragem);
-        manutencao.setValor(valor);
+        manutencao.setQuilometragem(txtQuilometragem);
+        manutencao.setValor(txtValor);
 
         Veiculo veiculo = (Veiculo) spinnerVeiculo.getSelectedItem();
         if (veiculo == null) {
@@ -412,6 +429,21 @@ public class ManutencaoActivity extends AppCompatActivity {
                 }
 
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public static String formatDecimal(String v) {
+        try {
+            String[] p = v.split("\\.");
+            String i = p[0];
+            String d = p[1];
+
+            if (d.length() == 1)
+                d += "0";
+
+            return i + "." + d;
+        } catch(IndexOutOfBoundsException e) {
+            return v + ".00";
         }
     }
 

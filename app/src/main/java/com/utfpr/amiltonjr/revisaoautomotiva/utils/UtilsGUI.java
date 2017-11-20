@@ -54,7 +54,7 @@ public class UtilsGUI {
             editText.setText(null);
             editText.requestFocus();
             return null;
-        }else{
+        } else {
             return texto.trim();
         }
     }

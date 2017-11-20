@@ -16,10 +16,10 @@ public class Manutencao {
     private String tipo;
 
     @DatabaseField(canBeNull = false)
-    private int quilometragem;
+    private String quilometragem;
 
     @DatabaseField(canBeNull = false)
-    private double valor;
+    private String valor;
 
     // As opções foreignAutoCreate e foreignAutoRefresh estão no ORMLite
     @DatabaseField(foreign = true) // o descricao da chave estrangeira gerado pelo ORMLite será veiculo_id
@@ -61,20 +61,20 @@ public class Manutencao {
     }
 
 
-    public int getQuilometragem() {
+    public String getQuilometragem() {
         return quilometragem;
     }
 
-    public void setQuilometragem(int quilometragem) {
+    public void setQuilometragem(String quilometragem) {
         this.quilometragem = quilometragem;
     }
 
 
-    public double getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 

@@ -225,16 +225,31 @@ public class VeiculoActivity extends AppCompatActivity {
 
     private void salvar() {
 
-        String placa  = UtilsGUI.validaCampoTexto(this, editTextPlaca, R.string.placa_vazia);
+        String placa = UtilsGUI.validaCampoTexto(this, editTextPlaca, R.string.placa_vazia);
+
+        if (placa == null)
+            return;
+
         String marca = UtilsGUI.validaCampoTexto(this, editTextMarca, R.string.marca_vazia);
+
+        if (marca == null)
+            return;
+
         String modelo = UtilsGUI.validaCampoTexto(this, editTextModelo, R.string.modelo_vazio);
+
+        if (modelo == null)
+            return;
+
         String cor = UtilsGUI.validaCampoTexto(this, editTextCor, R.string.cor_vazia);
+
+        if (cor == null)
+            return;
+
         Spinner s_categoria = (Spinner) findViewById(R.id.spinnerCategoriaVeiculo);
         String categoria = s_categoria.getSelectedItem().toString();
 
-        if (placa == null) {
+        if (categoria == null)
             return;
-        }
 
         try {
 

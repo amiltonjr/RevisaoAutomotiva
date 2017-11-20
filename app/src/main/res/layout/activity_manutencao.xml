@@ -149,12 +149,12 @@
             android:id="@+id/spinnerTipoRevisao"
             android:layout_width="216dp"
             android:layout_height="37dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTipo"
-            tools:layout_editor_absoluteY="116dp"
             android:entries="@array/tipos_manutencao"
-            android:prompt="@string/selecione_tipo" />
+            android:prompt="@string/selecione_tipo"
+            android:layout_marginLeft="16dp" />
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
