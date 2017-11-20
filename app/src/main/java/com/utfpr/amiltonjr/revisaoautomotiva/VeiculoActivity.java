@@ -70,7 +70,7 @@ public class VeiculoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        editTextPlaca       = (EditText) findViewById(R.id.editTextPlaca);
+        editTextPlaca       = (EditText) findViewById(R.id.editTextDescricao);
         editTextMarca       = (EditText) findViewById(R.id.editTextMarca);
         editTextModelo      = (EditText) findViewById(R.id.editTextModelo);
         editTextCor         = (EditText) findViewById(R.id.editTextCor);

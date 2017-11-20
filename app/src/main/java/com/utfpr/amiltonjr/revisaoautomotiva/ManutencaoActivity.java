@@ -21,6 +21,7 @@ import com.utfpr.amiltonjr.revisaoautomotiva.persistencia.ConexaoDatabase;
 import com.utfpr.amiltonjr.revisaoautomotiva.utils.UtilsGUI;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ManutencaoActivity extends AppCompatActivity {
@@ -32,12 +33,15 @@ public class ManutencaoActivity extends AppCompatActivity {
 
     private static final int REQUEST_NOVO_VEICULO = 1;
 
-    private EditText editTextDescricao;
-    private EditText editTextQuilometragem;
-    private Spinner  spinnerVeiculo;
+    private EditText    editTextDescricao;
+    private Spinner     spinnerTipo;
+    private EditText    editTextQuilometragem;
+    private EditText    editTextValor;
+    private Spinner     spinnerVeiculo;
 
     private List<Veiculo> listaVeiculos = null;
     private int posicao = -1;
+    private int posicao2 = -1;
 
     private int modo;
     private Manutencao manutencao;
@@ -65,16 +69,18 @@ public class ManutencaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.utfpr.amiltonjr.revisaoautomotiva.R.layout.activity_manutencao);
+        setContentView(R.layout.activity_manutencao);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        editTextDescricao  = (EditText) findViewById(com.utfpr.amiltonjr.revisaoautomotiva.R.id.editTextPlaca);
-        editTextQuilometragem = (EditText) findViewById(com.utfpr.amiltonjr.revisaoautomotiva.R.id.editTextQuilometragem);
-        spinnerVeiculo = (Spinner) findViewById(com.utfpr.amiltonjr.revisaoautomotiva.R.id.spinnerVeiculo);
+        editTextDescricao       = (EditText) findViewById(R.id.editTextDescricao);
+        spinnerTipo             = (Spinner) findViewById(R.id.spinnerTipoRevisao);
+        editTextQuilometragem   = (EditText) findViewById(R.id.editTextQuilometragem);
+        editTextValor           = (EditText) findViewById(R.id.editTextValor);
+        spinnerVeiculo          = (Spinner) findViewById(R.id.spinnerVeiculo);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -92,20 +98,24 @@ public class ManutencaoActivity extends AppCompatActivity {
 
                 editTextDescricao.setText(manutencao.getDescricao());
                 editTextQuilometragem.setText(String.valueOf(manutencao.getQuilometragem()));
+                editTextValor.setText(String.valueOf(manutencao.getValor()));
+
+                posicao2 = posicaoTipo(manutencao.getTipo());
+                spinnerTipo.setSelection(posicao2);
 
                 conexao.getVeiculoDao().refresh(manutencao.getVeiculo());
+
+                if (listaVeiculos == null)
+                    popularSpinner();
+
+                posicao = posicaoVeiculo(manutencao.getVeiculo());
+                spinnerVeiculo.setSelection(posicao);
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            if (listaVeiculos == null)
-                popularSpinner();
-
-            posicao = posicaoVeiculo(manutencao.getVeiculo());
-            spinnerVeiculo.setSelection(posicao);
-
-            setTitle(com.utfpr.amiltonjr.revisaoautomotiva.R.string.alterar_manutencao);
+            setTitle(R.string.alterar_manutencao);
 
         } else {
 
@@ -113,7 +123,7 @@ public class ManutencaoActivity extends AppCompatActivity {
 
             manutencao = new Manutencao();
 
-            setTitle(com.utfpr.amiltonjr.revisaoautomotiva.R.string.nova_manutencao);
+            setTitle(R.string.nova_manutencao);
         }
         
         // Listener da descrição
@@ -135,8 +145,46 @@ public class ManutencaoActivity extends AppCompatActivity {
             }
         });
 
+        // Listener do tipo
+        spinnerTipo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            int chamadas = 0;
+
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                chamadas++;
+
+                if ((modo == NOVO && chamadas > 1 && !editado) || (modo == ALTERAR && i != posicao2 && !editado)) {
+                    editado = true;
+
+                    findViewById(R.id.btnSalvar).setEnabled(true);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                posicao2 = -1;
+            }
+        });
+
         // Listener da quilometragem
         editTextQuilometragem.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!editado) {
+                    editado = true;
+
+                    findViewById(R.id.btnSalvar).setEnabled(true);
+                }
+            }
+        });
+
+        // Listener do valor
+        editTextValor.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {}
@@ -205,14 +253,16 @@ public class ManutencaoActivity extends AppCompatActivity {
         popularSpinner();
     }
 
-    private int posicaoTipo(Spinner lista) {
-        /*
+    private int posicaoTipo(String tipo) {
+
+        List<String> listaTipos = Arrays.asList(getResources().getStringArray(R.array.tipos_manutencao));
+
         try {
-            for (int pos = 0; pos < listaVeiculos.size(); pos++) {
+            for (int pos = 0; pos < listaTipos.size(); pos++) {
 
-                Veiculo t = listaVeiculos.get(pos);
+                String t = listaTipos.get(pos);
 
-                if (t.getId() == veiculo.getId())
+                if (t.equals(tipo))
                     return pos;
             }
         } catch (NullPointerException e) {
@@ -222,8 +272,6 @@ public class ManutencaoActivity extends AppCompatActivity {
         }
 
         return -1;
-        */
-        return 0;
     }
 
     private int posicaoVeiculo(Veiculo veiculo) {
@@ -270,31 +318,38 @@ public class ManutencaoActivity extends AppCompatActivity {
     }
 
     private void salvar() {
-        String descricao  = UtilsGUI.validaCampoTexto(this, editTextDescricao, com.utfpr.amiltonjr.revisaoautomotiva.R.string.descricao_vazia);
-        if (descricao == null) {
-            return;
-        }
 
-        String txtQuilometragem = UtilsGUI.validaCampoTexto(this, editTextQuilometragem, com.utfpr.amiltonjr.revisaoautomotiva.R.string.quilometragem_vazia);
-        if (txtQuilometragem == null) {
-            return;
-        }
-
+        String descricao  = UtilsGUI.validaCampoTexto(this, editTextDescricao, R.string.descricao_vazia);
+        String txtQuilometragem = UtilsGUI.validaCampoTexto(this, editTextQuilometragem, R.string.quilometragem_vazia);
         int quilometragem = Integer.parseInt(txtQuilometragem);
+        double valor = Double.parseDouble(UtilsGUI.validaCampoTexto(this, editTextValor, R.string.valor_vazio));
+
+        if (descricao == null || txtQuilometragem == null) {
+            return;
+        }
 
         // Valida a quilometragem
         if (quilometragem <= 0) {
-            UtilsGUI.avisoErro(this, com.utfpr.amiltonjr.revisaoautomotiva.R.string.quilometragem_invalida);
+            UtilsGUI.avisoErro(this, R.string.quilometragem_invalida);
             editTextQuilometragem.requestFocus();
             return;
         }
 
+        // Valida o valor
+        if (valor <= 0) {
+            UtilsGUI.avisoErro(this, R.string.valor_invalido);
+            editTextValor.requestFocus();
+            return;
+        }
+
         manutencao.setDescricao(descricao);
+        manutencao.setTipo(spinnerTipo.getSelectedItem().toString());
         manutencao.setQuilometragem(quilometragem);
+        manutencao.setValor(valor);
 
         Veiculo veiculo = (Veiculo) spinnerVeiculo.getSelectedItem();
         if (veiculo == null) {
-            UtilsGUI.avisoErro(this, com.utfpr.amiltonjr.revisaoautomotiva.R.string.veiculo_invalido);
+            UtilsGUI.avisoErro(this, R.string.veiculo_invalido);
             spinnerVeiculo.requestFocus();
             return;
         }
@@ -333,7 +388,7 @@ public class ManutencaoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(com.utfpr.amiltonjr.revisaoautomotiva.R.menu.edicao_detalhes, menu);
+        getMenuInflater().inflate(R.menu.edicao_detalhes, menu);
         return true;
     }
 
@@ -342,10 +397,10 @@ public class ManutencaoActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
 
-            case com.utfpr.amiltonjr.revisaoautomotiva.R.id.menuItemSalvar:
+            case R.id.menuItemSalvar:
                 salvar();
                 return true;
-            case com.utfpr.amiltonjr.revisaoautomotiva.R.id.menuItemCancelar:
+            case R.id.menuItemCancelar:
                 cancelar();
                 return true;
             default:

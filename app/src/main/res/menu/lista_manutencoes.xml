@@ -6,7 +6,7 @@
         android:id="@+id/menuItemNovo"
         android:icon="@android:drawable/ic_input_add"
         android:title="@string/novo"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemVeiculos"
         android:title="@string/veiculos"

@@ -6,10 +6,10 @@
         android:id="@+id/menuItemSalvar"
         android:icon="@android:drawable/ic_menu_save"
         android:title="@string/salvar"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemCancelar"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/cancelar"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

@@ -102,8 +102,6 @@ public class VeiculosActivity extends AppCompatActivity {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
         }
     }
 

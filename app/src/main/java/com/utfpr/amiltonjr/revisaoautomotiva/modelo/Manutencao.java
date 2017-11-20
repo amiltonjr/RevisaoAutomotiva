@@ -56,7 +56,7 @@ public class Manutencao {
         return tipo;
     }
 
-    public void setTipoo(String tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

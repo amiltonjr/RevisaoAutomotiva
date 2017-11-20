@@ -36,6 +36,8 @@
     <string name="placa_vazia">O número da placa está vazio!</string>
     <string name="marca_vazia">A marca está vazia!</string>
     <string name="modelo_vazio">O modelo está vazio!</string>
+    <string name="valor_vazio">O valor está vazio!</string>
+    <string name="valor_invalido">O valor deve ser maior que zero!</string>
     <string name="cor_vazia">A cor está vazia!</string>
     <string name="categoria_vazia">A categoria está vazia!</string>
     <string name="sem_veiculos">Nenhum veículo foi cadastrado ainda!</string>
