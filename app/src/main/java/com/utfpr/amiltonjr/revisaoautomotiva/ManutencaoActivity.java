@@ -81,7 +81,7 @@ public class ManutencaoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        editTextDescricao       = (EditText) findViewById(R.id.editTextDescricao);
+        editTextDescricao       = (EditText) findViewById(R.id.editTextPlaca);
         spinnerTipo             = (Spinner) findViewById(R.id.spinnerTipoRevisao);
         editTextQuilometragem   = (EditText) findViewById(R.id.editTextQuilometragem);
         editTextValor           = (EditText) findViewById(R.id.editTextValor);

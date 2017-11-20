@@ -24,7 +24,7 @@
             android:layout_marginStart="16dp" />
 
         <EditText
-            android:id="@+id/editTextDescricao"
+            android:id="@+id/editTextPlaca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -43,7 +43,7 @@
             android:layout_marginTop="7dp"
             android:text="@string/tipo"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextDescricao" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextPlaca" />
 
         <TextView
             android:id="@+id/textViewValor"

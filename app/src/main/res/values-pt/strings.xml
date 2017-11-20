@@ -36,6 +36,7 @@
     <string name="alterar_veiculo">Visualizar</string>
     <string name="descricao_vazia">A descrição está vazia!</string>
     <string name="placa_vazia">O número da placa está vazio!</string>
+    <string name="placa_invalida">O número da placa é inválido!</string>
     <string name="marca_vazia">A marca está vazia!</string>
     <string name="modelo_vazio">O modelo está vazio!</string>
     <string name="valor_vazio">O valor está vazio!</string>

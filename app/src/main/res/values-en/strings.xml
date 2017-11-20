@@ -31,6 +31,7 @@
     <string name="ok">OK</string>
     <string name="placa">License Plate</string>
     <string name="placa_usada">This license plate has already been used! Try another.</string>
+    <string name="placa_invalida">The license plate number is invalid!</string>
     <string name="placa_vazia">The license plate number is empty!</string>
     <string name="quilometragem">Kilometers</string>
     <string name="quilometragem_invalida">The kilometers must be greater than zero!</string>

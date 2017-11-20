@@ -45,13 +45,26 @@ public class UtilsGUI {
         alert.show();
     }
 
-    public static String validaCampoTexto(Context  contexto, EditText editText, int idMensagemErro) {
+    public static String validaCampoTexto(Context contexto, EditText editText, int idMensagemErro) {
 
         String texto = editText.getText().toString();
 
         if (UtilsString.stringVazia(texto)) {
             UtilsGUI.avisoErro(contexto, idMensagemErro);
             editText.setText(null);
+            editText.requestFocus();
+            return null;
+        } else {
+            return texto.trim();
+        }
+    }
+
+    public static String validaPlaca(Context contexto, EditText editText, int idMensagemErro) {
+
+        String texto = editText.getText().toString();
+
+        if (UtilsString.stringVazia(texto) || texto.length() != 8) {
+            UtilsGUI.avisoErro(contexto, idMensagemErro);
             editText.requestFocus();
             return null;
         } else {

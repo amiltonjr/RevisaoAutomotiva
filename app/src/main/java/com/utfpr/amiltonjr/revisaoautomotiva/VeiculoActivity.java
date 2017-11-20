@@ -70,7 +70,7 @@ public class VeiculoActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        editTextPlaca       = (EditText) findViewById(R.id.editTextDescricao);
+        editTextPlaca       = (EditText) findViewById(R.id.editTextPlaca);
         editTextMarca       = (EditText) findViewById(R.id.editTextMarca);
         editTextModelo      = (EditText) findViewById(R.id.editTextModelo);
         editTextCor         = (EditText) findViewById(R.id.editTextCor);
@@ -228,6 +228,11 @@ public class VeiculoActivity extends AppCompatActivity {
         String placa = UtilsGUI.validaCampoTexto(this, editTextPlaca, R.string.placa_vazia);
 
         if (placa == null)
+            return;
+
+        String v_placa = UtilsGUI.validaPlaca(this, editTextPlaca, R.string.placa_invalida);
+
+        if (v_placa == null)
             return;
 
         String marca = UtilsGUI.validaCampoTexto(this, editTextMarca, R.string.marca_vazia);
