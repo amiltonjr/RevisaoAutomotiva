@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Automotive Maintenance</string>
+    <string name="abrir">Open</string>
+    <string name="add_veiculo">+</string>
+    <string name="alterar_manutencao">View</string>
+    <string name="alterar_veiculo">View</string>
+    <string name="apagar">Delete</string>
+    <string name="aviso">Warning</string>
+    <string name="cancelar">Cancel</string>
+    <string name="categoria">Category</string>
+    <string name="categoria_vazia">The category is empty!</string>
+    <string name="confirmacao">Confirming</string>
+    <string name="cor">Color</string>
+    <string name="cor_vazia">The color is empty!</string>
+    <string name="descricao">Description</string>
+    <string name="descricao_usada">This description has already been used. Try another.</string>
+    <string name="descricao_vazia">The description is empty!</string>
+    <string name="deseja_realmente_apagar">Are you sure you want to delete?</string>
+    <string name="marca">Make</string>
+    <string name="marca_vazia">The make is empty!</string>
+    <string name="modelo">Model</string>
+    <string name="modelo_vazio">The model is empty!</string>
+    <string name="nao">No</string>
+    <string name="nome_veiculo">Vehicle</string>
+    <string name="nova_manutencao">New Maintenance</string>
+    <string name="novo">New</string>
+    <string name="novo_veiculo">New Vehicle</string>
+    <string name="ok">OK</string>
+    <string name="placa">License Plate</string>
+    <string name="placa_usada">This license plate has already been used! Try another.</string>
+    <string name="placa_vazia">The license plate number is empty!</string>
+    <string name="quilometragem">Kilometers</string>
+    <string name="quilometragem_invalida">The kilometers must be greater than zero!</string>
+    <string name="quilometragem_vazia">The kilometers are empty!</string>
+    <string name="salvar">Save</string>
+    <string name="selecione_categoria">Select a Category:</string>
+    <string name="selecione_tipo">Select a Type:</string>
+    <string name="sem_manutencoes">There is no maintenance saved yet!</string>
+    <string name="sem_veiculos">There is no vehicle saved yet!</string>
+    <string name="sim">Yes</string>
+    <string name="tipo">Type</string>
+    <string name="valor">Price</string>
+    <string name="valor_invalido">The price must be greater than zero!</string>
+    <string name="valor_vazio">The price is empty!</string>
+    <string name="veiculo">Vehicle</string>
+    <string name="veiculo_invalido">No vehicle selected!</string>
+    <string name="veiculo_usado">The vehicle is being used and cannot be deleted!</string>
+    <string name="veiculos">Vehicles</string>
+    <string name="voltar">Go Back</string>
+
+    <string-array name="tipos_manutencao">
+        <item>Regular</item>
+        <item>Preventive</item>
+        <item>Corrective</item>
+        <item>Upgrade</item>
+    </string-array>
+
+    <string-array name="veiculo_categoria">
+        <item>Car</item>
+        <item>Motorcycle</item>
+        <item>Mini Van</item>
+        <item>SUV</item>
+        <item>Truck</item>
+        <item>Bus</item>
+    </string-array>
+</resources>

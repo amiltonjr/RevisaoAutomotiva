@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Revisão Automotiva</string>
+    <string name="novo">Novo</string>
+    <string name="tipo">Tipo</string>
+    <string name="selecione_tipo">Selecione um Tipo:</string>
+    <string name="selecione_categoria">Selecione uma Categoria:</string>
+    <string name="quilometragem">Quilometragem</string>
+    <string name="valor">Valor</string>
+    <string name="salvar">Salvar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="voltar">Voltar</string>
+    <string name="placa">Placa</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="cor">Cor</string>
+    <string name="categoria">Categoria</string>
+    <string name="nova_manutencao">Nova Manutenção</string>
+    <string name="alterar_manutencao">Visualizar</string>
+    <string name="sem_manutencoes">Ainda não há nenhuma manutenção cadastrada!</string>
+    <string name="abrir">Abrir</string>
+    <string name="apagar">Apagar</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="confirmacao">Confirmação</string>
+    <string name="deseja_realmente_apagar">Deseja realmente apagar?</string>
+    <string name="aviso">Aviso</string>
+    <string name="ok">OK</string>
+    <string name="quilometragem_vazia">A quilometragem está vazia!</string>
+    <string name="quilometragem_invalida">A quilometragem deve ser maior que zero!</string>
+    <string name="descricao">Descrição</string>
+    <string name="novo_veiculo">Novo Veiculo</string>
+    <string name="add_veiculo">+</string>
+    <string name="nome_veiculo">Veículo</string>
+    <string name="alterar_veiculo">Visualizar</string>
+    <string name="descricao_vazia">A descrição está vazia!</string>
+    <string name="placa_vazia">O número da placa está vazio!</string>
+    <string name="marca_vazia">A marca está vazia!</string>
+    <string name="modelo_vazio">O modelo está vazio!</string>
+    <string name="valor_vazio">O valor está vazio!</string>
+    <string name="valor_invalido">O valor deve ser maior que zero!</string>
+    <string name="cor_vazia">A cor está vazia!</string>
+    <string name="categoria_vazia">A categoria está vazia!</string>
+    <string name="sem_veiculos">Nenhum veículo foi cadastrado ainda!</string>
+    <string name="veiculo_invalido">Nenhum veículo selecionado!</string>
+    <string name="veiculo">Veículo</string>
+    <string name="veiculos">Veículos</string>
+    <string name="veiculo_usado">O veiculo está sendo usado e não pode ser apagado!</string>
+    <string name="descricao_usada">Esta descrição já foi usada! Tente outra.</string>
+    <string name="placa_usada">Esta placa já foi usada! Tente outra.</string>
+
+    <string-array name="tipos_manutencao">
+        <item>Regular</item>
+        <item>Preventiva</item>
+        <item>Corretiva</item>
+        <item>Upgrade</item>
+    </string-array>
+
+    <string-array name="veiculo_categoria">
+        <item>Carro</item>
+        <item>Motocicleta</item>
+        <item>Mini Van</item>
+        <item>Caminhonete</item>
+        <item>Caminhão</item>
+        <item>Ônibus</item>
+    </string-array>
+</resources>
