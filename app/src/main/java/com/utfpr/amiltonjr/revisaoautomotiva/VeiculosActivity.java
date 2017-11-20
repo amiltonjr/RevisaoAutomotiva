@@ -60,6 +60,17 @@ public class VeiculosActivity extends AppCompatActivity {
         registerForContextMenu(listViewVeiculos);
 
         setTitle(R.string.veiculos);
+
+        Button btnRodape = (Button) findViewById(R.id.btnRodape);
+        btnRodape.setText(R.string.manutencoes);
+
+        // Listener do botão do rodapé
+        btnRodape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void popularLista() {
@@ -113,7 +124,7 @@ public class VeiculosActivity extends AppCompatActivity {
         VeiculoActivity.novo(this, REQUEST_NOVO_VEICULO);
     }
 
-    private void excluirVeiculo(final Veiculo veiculo){
+    private void excluirVeiculo(final Veiculo veiculo) {
 
         try {
 

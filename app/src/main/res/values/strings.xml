@@ -24,6 +24,8 @@
     <string name="nao">No</string>
     <string name="nome_veiculo">Vehicle</string>
     <string name="nova_manutencao">New Maintenance</string>
+    <string name="manutencao">Maintenance</string>
+    <string name="manutencoes">Maintenances</string>
     <string name="novo">New</string>
     <string name="novo_veiculo">New Vehicle</string>
     <string name="ok">OK</string>

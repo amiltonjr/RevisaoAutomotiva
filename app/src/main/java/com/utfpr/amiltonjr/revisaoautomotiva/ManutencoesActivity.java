@@ -25,7 +25,8 @@ import java.util.List;
 
 public class ManutencoesActivity extends AppCompatActivity {
 
-    private ListView             listViewManutencao;
+    private ListView            listViewManutencao;
+    private Button              btnRodape;
     private ArrayAdapter<Manutencao> listaAdapter;
 
     private static final int REQUEST_NOVA_MANUTENCAO    = 1;
@@ -39,7 +40,9 @@ public class ManutencoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista);
 
         listViewManutencao = (ListView) findViewById(R.id.listViewItens);
+        btnRodape = (Button) findViewById(R.id.btnRodape);
 
+        // Listener da lista de manutenções
         listViewManutencao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,6 +54,14 @@ public class ManutencoesActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(listViewManutencao);
+
+        // Listener do botão do rodapé
+        btnRodape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listaVeiculos();
+            }
+        });
 
         // Lê onde o usuário parou da última vez
         String ondeParou = pref_recover("activity");
