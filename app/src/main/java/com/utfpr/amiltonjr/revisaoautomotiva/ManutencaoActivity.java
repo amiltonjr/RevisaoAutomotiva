@@ -2,6 +2,7 @@ package com.utfpr.amiltonjr.revisaoautomotiva;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class ManutencaoActivity extends AppCompatActivity {
     public static final int    ALTERAR = 2;
 
     private static final int REQUEST_NOVO_VEICULO = 1;
+    private static final String SAVENAME = "PREFERENCIAS";
 
     private EditText    editTextDescricao;
     private Spinner     spinnerTipo;
@@ -404,7 +406,24 @@ public class ManutencaoActivity extends AppCompatActivity {
                 cancelar();
                 return true;
             default:
+                // Ação do botão "voltar"
+                if (pref_recover("activity").equals("novaManutencao") || pref_recover("activity").equals("inicioManutencao")) {
+                    pref_save("activity", "inicioManutencao");
+                }
+
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void pref_save(String chave, String valor) {
+        SharedPreferences.Editor editor = getSharedPreferences(SAVENAME, MODE_PRIVATE).edit();
+        editor.putString(chave, valor);
+        editor.apply();
+    }
+
+    public String pref_recover(String chave) {
+        SharedPreferences prefs = getSharedPreferences(SAVENAME, MODE_PRIVATE);
+        return prefs.getString(chave, null);
+    }
+
 }

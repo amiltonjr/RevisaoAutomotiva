@@ -9,7 +9,7 @@ import com.utfpr.amiltonjr.revisaoautomotiva.R;
 
 public class UtilsGUI {
 
-    public static void avisoErro(Context contexto, int idTexto){
+    public static void avisoErro(Context contexto, int idTexto) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
@@ -29,9 +29,7 @@ public class UtilsGUI {
         alert.show();
     }
 
-    public static void confirmaAcao(Context contexto,
-                                    String mensagem,
-                                    DialogInterface.OnClickListener listener){
+    public static void confirmaAcao(Context contexto, String mensagem, DialogInterface.OnClickListener listener) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
 
@@ -47,13 +45,11 @@ public class UtilsGUI {
         alert.show();
     }
 
-    public static String validaCampoTexto(Context  contexto,
-                                          EditText editText,
-                                          int idMensagemErro){
+    public static String validaCampoTexto(Context  contexto, EditText editText, int idMensagemErro) {
 
         String texto = editText.getText().toString();
 
-        if (UtilsString.stringVazia(texto)){
+        if (UtilsString.stringVazia(texto)) {
             UtilsGUI.avisoErro(contexto, idMensagemErro);
             editText.setText(null);
             editText.requestFocus();

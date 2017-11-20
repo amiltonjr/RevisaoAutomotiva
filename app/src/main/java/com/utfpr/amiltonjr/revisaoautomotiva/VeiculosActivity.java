@@ -199,7 +199,7 @@ public class VeiculosActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch(item.getItemId()){
+        switch(item.getItemId()) {
 
             case R.id.menuItemNovo:
                 pref_save("activity", "novoVeiculo");
@@ -208,6 +208,11 @@ public class VeiculosActivity extends AppCompatActivity {
 
                 return true;
             default:
+                // Ação do botão "voltar"
+                if (pref_recover("activity").equals("inicioVeiculos") || pref_recover("activity").equals("novoVeiculo")) {
+                    pref_save("activity", "inicioManutencao");
+                }
+
                 return super.onOptionsItemSelected(item);
         }
     }

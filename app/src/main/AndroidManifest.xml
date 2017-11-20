@@ -8,33 +8,32 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-            <activity android:name=".ManutencoesActivity">
+            <activity android:name="com.utfpr.amiltonjr.revisaoautomotiva.ManutencoesActivity">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
-
                     <category android:name="android.intent.category.LAUNCHER" />
                 </intent-filter>
             </activity>
-            <activity android:name=".ManutencaoActivity"
-                android:parentActivityName=".ManutencoesActivity">
+            <activity android:name="com.utfpr.amiltonjr.revisaoautomotiva.ManutencaoActivity"
+                android:parentActivityName="com.utfpr.amiltonjr.revisaoautomotiva.ManutencoesActivity">
                 <!-- Parent activity meta-data to support 4.0 and lower -->
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ManutencoesActivity" />
+                    android:value="com.utfpr.amiltonjr.revisaoautomotiva.ManutencoesActivity" />
             </activity>
             <activity android:name=".VeiculoActivity"
-                android:parentActivityName=".VeiculosActivity">
+                android:parentActivityName="com.utfpr.amiltonjr.revisaoautomotiva.VeiculosActivity">
                 <!-- Parent activity meta-data to support 4.0 and lower -->
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".VeiculosActivity" />
+                    android:value="com.utfpr.amiltonjr.revisaoautomotiva.VeiculosActivity" />
             </activity>
             <activity android:name=".VeiculosActivity"
-                android:parentActivityName=".ManutencoesActivity">
+                android:parentActivityName="com.utfpr.amiltonjr.revisaoautomotiva.ManutencoesActivity">
                 <!-- Parent activity meta-data to support 4.0 and lower -->
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ManutencoesActivity" />
+                    android:value="com.utfpr.amiltonjr.revisaoautomotiva.ManutencoesActivity" />
             </activity>
         </application>
 
