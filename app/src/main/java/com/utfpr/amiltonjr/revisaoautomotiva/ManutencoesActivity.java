@@ -2,6 +2,7 @@ package com.utfpr.amiltonjr.revisaoautomotiva;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -29,6 +30,8 @@ public class ManutencoesActivity extends AppCompatActivity {
 
     private static final int REQUEST_NOVA_MANUTENCAO    = 1;
     private static final int REQUEST_ALTERAR_MANUTENCAO = 2;
+    private static final String SAVENAME = "PREFERENCIAS";
+    private static final int REQUEST_NOVO_VEICULO = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,25 @@ public class ManutencoesActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(listViewManutencao);
+
+        // Lê onde o usuário parou da última vez
+        String ondeParou = pref_recover("activity");
+        if (ondeParou != null) {
+            switch (ondeParou) {
+                case "inicioVeiculos":
+                    listaVeiculos();
+                break;
+                case "novoVeiculo":
+                    novoVeiculo();
+                break;
+                case "novaManutencao":
+                    novaManutencao();
+                break;
+                default:
+                    // Nada
+                break;
+            }
+        }
     }
 
     @Override
@@ -58,6 +80,8 @@ public class ManutencoesActivity extends AppCompatActivity {
     }
 
     private void popularLista() {
+
+        pref_save("activity", "inicioManutencoes");
 
         TextView textSemManutencoes = (TextView) findViewById(R.id.textSemManutencoes);
         Button btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
@@ -104,6 +128,10 @@ public class ManutencoesActivity extends AppCompatActivity {
         Intent intent = new Intent(this, VeiculosActivity.class);
 
         startActivity(intent);
+    }
+
+    private void novoVeiculo() {
+        VeiculoActivity.novo(this, REQUEST_NOVO_VEICULO);
     }
 
     private void excluirManutencao(final Manutencao manutencao){
@@ -168,6 +196,8 @@ public class ManutencoesActivity extends AppCompatActivity {
                     UtilsGUI.avisoErro(this, R.string.sem_veiculos);
                     return false;
                 }
+
+                pref_save("activity", "novaManutencao");
 
                 novaManutencao();
 
@@ -252,5 +282,16 @@ public class ManutencoesActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    public void pref_save(String chave, String valor) {
+        SharedPreferences.Editor editor = getSharedPreferences(SAVENAME, MODE_PRIVATE).edit();
+        editor.putString(chave, valor);
+        editor.apply();
+    }
+
+    public String pref_recover(String chave) {
+        SharedPreferences prefs = getSharedPreferences(SAVENAME, MODE_PRIVATE);
+        return prefs.getString(chave, null);
     }
 }
